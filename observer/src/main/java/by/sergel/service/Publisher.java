@@ -1,10 +1,12 @@
-package by.sergel.model;
+package by.sergel.service;
 
+import by.sergel.model.Observer;
+import by.sergel.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Component;
 
-import java.util.LinkedList;
 import java.util.List;
 
 public class Publisher implements Subject{
@@ -14,13 +16,15 @@ public class Publisher implements Subject{
     private String from;
     private List<Observer> observers;
 
-    public Publisher() {
-        this.observers = new LinkedList<>();
+    public Publisher(List<Observer> observers) {
+        this.observers = observers;
     }
 
     @Override
     public void addObserver(Observer observer) {
-        observers.add(observer);
+        if(!observers.contains(observer)){
+            observers.add(observer);
+        }
     }
 
     @Override
@@ -33,5 +37,9 @@ public class Publisher implements Subject{
         for(Observer o : observers){
             o.sendMessage(from, message, subject, sender);
         }
+    }
+
+    public List<Observer> getObservers(){
+        return observers;
     }
 }

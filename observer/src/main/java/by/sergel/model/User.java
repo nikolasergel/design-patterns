@@ -1,10 +1,13 @@
 package by.sergel.model;
 
-import lombok.Getter;
+import lombok.*;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 
 @Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class User implements Observer{
     private Long id;
     private String email;

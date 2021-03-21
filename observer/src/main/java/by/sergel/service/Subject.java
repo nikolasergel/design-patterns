@@ -1,5 +1,7 @@
-package by.sergel.model;
+package by.sergel.service;
 
+
+import by.sergel.model.Observer;
 
 public interface Subject {
     void addObserver(Observer observer);
